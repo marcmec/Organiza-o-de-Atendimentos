@@ -1,67 +1,48 @@
-# Organização de Atendimentos em uma Clínica Veterinária
+# Organização de Atendimentos — Clínica Veterinária Comunitária
 
-## Contexto
+## Descrição
 
-Você foi contratado(a) por uma clínica veterinária comunitária que oferece atendimento gratuito para animais de rua resgatados por ONGs da região. A clínica possui **vários consultórios** funcionando em paralelo, e cada um deles atende em **dois turnos diários**: manhã e tarde.
+Programa que distribui automaticamente atendimentos veterinários entre consultórios, respeitando as regras de horário da clínica (sessões manhã/tarde, higienização e reunião de encerramento).
 
-Os organizadores receberam uma lista enorme de pedidos de atendimento (consultas, exames, cirurgias, procedimentos) e estão tendo dificuldade em distribuí-los entre os consultórios respeitando as regras da clínica. Sua missão é escrever um programa que faça essa organização automaticamente.
+## Requisitos
 
-## Regras de funcionamento
+- Python 3.8+
 
-- A clínica possui **vários consultórios** (tracks), cada um com uma agenda independente.
-- Cada consultório tem uma **sessão da manhã** e uma **sessão da tarde**.
-- A **sessão da manhã** começa às **08:00** e deve terminar até as **11:30**, quando começa a higienização dos consultórios.
-- A **sessão da tarde** começa às **13:30** e deve terminar a tempo da **reunião de encerramento da equipe**.
-- A reunião de encerramento deve começar **depois das 17:00**, mas **antes das 18:00**.
-- Nenhum dos nomes dos atendimentos contém números.
-- A duração de cada atendimento é dada em **minutos** ou marcada como **expresso** (atendimentos rápidos de 10 minutos, como aplicação de vacina).
-- Não há intervalos entre os atendimentos — a equipe está bem coordenada.
-- O número de consultórios necessários deve ser **calculado pelo seu programa** com base na lista de entrada (ou seja, ele não é fixo).
+## Como executar
 
-## Dados para teste (arquivo `atendimentos.txt`)
+```bash
+# Com o arquivo padrão (atendimentos.txt)
+python atendimentos.py
 
-```
-Castração de gato adulto 90min
-Aplicação de vacina antirrábica expresso
-Limpeza dentária em cão de pequeno porte 45min
-Consulta de rotina em filhote de gato 30min
-Exame de sangue completo 30min
-Cirurgia ortopédica em cão atropelado 120min
-Avaliação dermatológica em cão com sarna 45min
-Microchipagem expresso
-Retirada de pontos pós-cirúrgicos 30min
-Atendimento de emergência respiratória 60min
-Consulta com nutricionista veterinária 45min
-Ultrassonografia abdominal 60min
-Castração de cadela em fase reprodutiva 90min
-Vermifugação em ninhada de filhotes 30min
-Avaliação cardiológica em cão idoso 60min
-Curativo de ferida exposta 30min
-Aplicação de vacina V10 expresso
-Consulta comportamental para gato resgatado 45min
-Raio-X de pata traseira 30min
-Tratamento de otite em cão 30min
-Cirurgia de remoção de tumor cutâneo 90min
-Resgate emocional: socialização de gato feral 60min
-Avaliação ortopédica em cão com displasia 45min
+# Com outro arquivo de entrada
+python atendimentos.py minha_lista.txt
 ```
 
-## Resultado esperado (formato de saída)
+## Como rodar os testes
 
-```
-Consultório 1:
-08:00 [atendimento] [duração]
-...
-11:30 Higienização
-13:30 [atendimento] [duração]
-...
-17:XX Reunião de encerramento
-
-Consultório 2:
-...
+```bash
+python -m unittest test_atendimentos -v
 ```
 
-A combinação exata dos atendimentos pode variar conforme a abordagem escolhida — o que importa é que **todas as regras sejam respeitadas**.
+## Estrutura do projeto
+
+| Arquivo | Descrição |
+|---|---|
+| `atendimentos.py` | Código principal |
+| `atendimentos.txt` | Dados de teste |
+| `test_atendimentos.py` | Suíte de testes automatizados (16 testes) |
+| `RACIOCINIO.md` | Justificativa do raciocínio (12 perguntas) |
+| `README.md` | Este arquivo |
+
+## Regras implementadas
+
+- Manhã: 08:00 – 11:30 (210 min)
+- Higienização: 11:30 – 13:30
+- Tarde: 13:30 – até 17:59 (máx. 269 min de atendimentos)
+- Reunião de encerramento: entre 17:00 e 18:00
+- Atendimentos "expresso": 10 minutos
+- Número de consultórios calculado automaticamente
+- Algoritmo: First Fit Decreasing (bin packing)
 
 ---
 
