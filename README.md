@@ -87,3 +87,7 @@ Além do código funcionando, este desafio exige que você **explique o raciocí
 8. Como seu programa decide **quantos consultórios** abrir? Explique o critério.
 9. Como você tratou os atendimentos **expressos**? Por que essa abordagem?
 10. Aponte um trecho do seu código que você considera **a parte mais inteligente** da solução, e outro que você acha que **poderia ser melhorado**. Justifique ambos.
+
+
+### Instruções de execução
+Ao abrir este projeto, basta navegar até o arquivo main.py e clicar no Botão Play no canto superior direito (se for no VScode) para rodar o código. A resposta será exibida no terminal.
