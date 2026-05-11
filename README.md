@@ -63,6 +63,20 @@ Consultório 2:
 
 A combinação exata dos atendimentos pode variar conforme a abordagem escolhida — o que importa é que **todas as regras sejam respeitadas**.
 
+## Como executar
+
+Use o comando abaixo no terminal a partir da raiz deste repositório:
+
+```bash
+python organiza_atendimentos.py atendimentos
+```
+
+Se preferir, forneça o caminho de outro arquivo de entrada como argumento:
+
+```bash
+python organiza_atendimentos.py atendimentos.txt
+```
+
 ---
 
 ## ⚠️ Diferencial deste desafio: Justificativa do raciocínio
