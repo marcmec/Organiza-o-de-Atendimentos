@@ -65,6 +65,30 @@ A combinação exata dos atendimentos pode variar conforme a abordagem escolhida
 
 ---
 
+## Como executar
+
+**Pré-requisito:** Python 3.10 ou superior (sem dependências externas).
+
+```bash
+python3 organizador.py atendimentos.txt
+```
+
+Para usar um arquivo de entrada diferente, passe o caminho como argumento:
+
+```bash
+python3 organizador.py outro_arquivo.txt
+```
+
+## Como executar os testes
+
+```bash
+python3 -m unittest test_organizador -v
+```
+
+Os testes cobrem parsing, propriedades das estruturas de dados, lógica de alocação, reparo de restrições e o pipeline completo com `atendimentos.txt`.
+
+---
+
 ## ⚠️ Diferencial deste desafio: Justificativa do raciocínio
 
 Além do código funcionando, este desafio exige que você **explique o raciocínio por trás da sua solução**. A entrega deve incluir um arquivo `RACIOCINIO.md` no repositório respondendo às perguntas abaixo. Respostas genéricas ou copiadas de tutoriais serão desconsideradas.
