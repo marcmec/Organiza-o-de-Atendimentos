@@ -1,0 +1,17 @@
+# Lista de atendimentos da clínica
+Consulta de rotina em cachorro 30min
+Aplicação de vacina antirrábica expresso
+Castração de gato adulto 90min
+Limpeza dentária em cão pequeno 45min
+Exame de sangue completo 30min
+Cirurgia ortopédica em cão atropelado 120min
+Avaliação dermatológica em gato 45min
+Microchipagem expresso
+Retirada de pontos 30min
+Atendimento emergencial respiratório 60min
+Ultrassonografia abdominal 60min
+Avaliação cardiológica em cão idoso 60min
+Curativo de ferida exposta 30min
+Aplicação de vacina V10 expresso
+Raio-X de pata traseira 30min
+Tratamento de otite 30min
