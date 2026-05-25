@@ -1,0 +1,11 @@
+10
+1,Roberto Alves,480,normal
+2,Sandra Lima,240,normal
+3,Thiago Melo,240,normal
+4,Ursula Faria,10,expresso
+5,Vitor Santos,10,expresso
+6,Wendy Costa,10,expresso
+7,Xavier Borges,10,expresso
+8,Yara Cunha,120,normal
+9,Zara Pinto,120,normal
+10,Arthur Rocha,60,normal

@@ -1,0 +1,16 @@
+15
+1,Ana Beatriz,60,normal
+2,Carlos Melo,10,expresso
+3,Diana Faria,90,normal
+4,Eduardo Lima,10,expresso
+5,Fernanda Cruz,120,normal
+6,Gabriel Neto,45,normal
+7,Helena Rocha,15,expresso
+8,Igor Santos,30,normal
+9,Julia Alves,60,normal
+10,Kevin Costa,10,expresso
+11,Larissa Pinto,90,normal
+12,Marcos Vieira,45,normal
+13,Natalia Borges,30,normal
+14,Otavio Cunha,120,normal
+15,Patricia Leal,60,normal
