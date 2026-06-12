@@ -1,89 +1,112 @@
-# Organização de Atendimentos em uma Clínica Veterinária
+# Organização de Atendimentos — Clínica Veterinária
 
-## Contexto
+Solução para o desafio de **organização de atendimentos** de uma clínica
+veterinária com vários consultórios. O programa lê uma lista de atendimentos e
+distribui cada um entre os consultórios (e dentro deles, entre a sessão da manhã
+e a da tarde) respeitando as regras da clínica, calculando **automaticamente**
+quantos consultórios são necessários.
 
-Você foi contratado(a) por uma clínica veterinária comunitária que oferece atendimento gratuito para animais de rua resgatados por ONGs da região. A clínica possui **vários consultórios** funcionando em paralelo, e cada um deles atende em **dois turnos diários**: manhã e tarde.
+> O raciocínio completo (modelagem, escolha do algoritmo, complexidade, limites)
+> está em **[RACIOCINIO.md](RACIOCINIO.md)**.
 
-Os organizadores receberam uma lista enorme de pedidos de atendimento (consultas, exames, cirurgias, procedimentos) e estão tendo dificuldade em distribuí-los entre os consultórios respeitando as regras da clínica. Sua missão é escrever um programa que faça essa organização automaticamente.
+## Regras implementadas
 
-## Regras de funcionamento
+- Vários consultórios em paralelo, cada um com **manhã** e **tarde**.
+- **Manhã:** 08:00 → 11:30 (no máx. **210 min**), depois **higienização** às 11:30.
+- **Tarde:** começa às **13:30** e termina a tempo da **reunião de encerramento**.
+- A reunião começa **a partir das 17:00 e antes das 18:00** → a tarde tem entre
+  **210 e 270 minutos** (janela `[210, 270)`).
+- Atendimento **`expresso`** = **10 minutos**.
+- O número de consultórios é **calculado**, não fixado.
 
-- A clínica possui **vários consultórios** (tracks), cada um com uma agenda independente.
-- Cada consultório tem uma **sessão da manhã** e uma **sessão da tarde**.
-- A **sessão da manhã** começa às **08:00** e deve terminar até as **11:30**, quando começa a higienização dos consultórios.
-- A **sessão da tarde** começa às **13:30** e deve terminar a tempo da **reunião de encerramento da equipe**.
-- A reunião de encerramento deve começar **depois das 17:00**, mas **antes das 18:00**.
-- Nenhum dos nomes dos atendimentos contém números.
-- A duração de cada atendimento é dada em **minutos** ou marcada como **expresso** (atendimentos rápidos de 10 minutos, como aplicação de vacina).
-- Não há intervalos entre os atendimentos — a equipe está bem coordenada.
-- O número de consultórios necessários deve ser **calculado pelo seu programa** com base na lista de entrada (ou seja, ele não é fixo).
+## Como executar
 
-## Dados para teste (arquivo `atendimentos.txt`)
+Pré-requisito: **Python 3.8+** (testado com 3.12). Não há dependências externas.
+
+A partir da raiz do projeto:
+
+```bash
+# usa o arquivo padrão atendimentos.txt
+python main.py
+
+# ou aponte para outro arquivo de entrada
+python main.py outra_lista.txt
+```
+
+A saída é impressa no terminal, um bloco por consultório.
+
+### Salvando a saída em arquivo (Windows / PowerShell)
+
+O operador `>` do PowerShell 5.1 grava em UTF-16 e pode embaralhar acentos. Para
+um arquivo UTF-8 limpo, use:
+
+```powershell
+python main.py | Out-File -Encoding utf8 saida.txt
+```
+
+No `cmd` ou em terminais já em UTF-8, `python main.py > saida.txt` funciona.
+Um exemplo de saída para a entrada oficial está em
+[`saida_oficial.txt`](saida_oficial.txt).
+
+## Como rodar os testes
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+São 19 testes cobrindo: parsing (incluindo nome com número, como "V10"),
+o valor do expresso, todas as regras de horário sobre a agenda gerada, o número
+de consultórios para a entrada oficial, casos-limite (lista vazia, entrada
+inviável, um único atendimento grande) e o critério de **robustez** (uma segunda
+entrada semelhante também produz agenda válida).
+
+## Formato da entrada (`atendimentos.txt`)
+
+Uma linha por atendimento: `<nome> <duração>`, onde a duração é o **último
+token** e vale `<n>min` (ex.: `90min`) ou `expresso`. Exemplo:
 
 ```
 Castração de gato adulto 90min
 Aplicação de vacina antirrábica expresso
-Limpeza dentária em cão de pequeno porte 45min
-Consulta de rotina em filhote de gato 30min
-Exame de sangue completo 30min
 Cirurgia ortopédica em cão atropelado 120min
-Avaliação dermatológica em cão com sarna 45min
-Microchipagem expresso
-Retirada de pontos pós-cirúrgicos 30min
-Atendimento de emergência respiratória 60min
-Consulta com nutricionista veterinária 45min
-Ultrassonografia abdominal 60min
-Castração de cadela em fase reprodutiva 90min
-Vermifugação em ninhada de filhotes 30min
-Avaliação cardiológica em cão idoso 60min
-Curativo de ferida exposta 30min
-Aplicação de vacina V10 expresso
-Consulta comportamental para gato resgatado 45min
-Raio-X de pata traseira 30min
-Tratamento de otite em cão 30min
-Cirurgia de remoção de tumor cutâneo 90min
-Resgate emocional: socialização de gato feral 60min
-Avaliação ortopédica em cão com displasia 45min
 ```
 
-## Resultado esperado (formato de saída)
+> O parser olha apenas o último token para descobrir a duração, então nomes que
+> contêm números (ex.: "vacina **V10** expresso") não confundem a leitura.
+
+## Exemplo de saída (entrada oficial)
 
 ```
 Consultório 1:
-08:00 [atendimento] [duração]
+08:00 Consulta com nutricionista veterinária 45min
 ...
 11:30 Higienização
-13:30 [atendimento] [duração]
+13:30 Cirurgia ortopédica em cão atropelado 120min
 ...
-17:XX Reunião de encerramento
+17:30 Reunião de encerramento
 
 Consultório 2:
 ...
 ```
 
-A combinação exata dos atendimentos pode variar conforme a abordagem escolhida — o que importa é que **todas as regras sejam respeitadas**.
+A entrada oficial (1095 minutos no total) é organizada em **3 consultórios**,
+todos com a manhã encerrando até as 11:30 e a reunião entre 17:30 e 17:55.
 
----
+## Estrutura do projeto
 
-## ⚠️ Diferencial deste desafio: Justificativa do raciocínio
-
-Além do código funcionando, este desafio exige que você **explique o raciocínio por trás da sua solução**. A entrega deve incluir um arquivo `RACIOCINIO.md` no repositório respondendo às perguntas abaixo. Respostas genéricas ou copiadas de tutoriais serão desconsideradas.
-
-### Parte 1 — Modelagem do problema
-
-1. Como você classificou esse problema? (Ex.: empacotamento, escalonamento, busca, otimização combinatória, etc.) Justifique a escolha citando características do enunciado que apoiam essa classificação.
-2. Esse problema tem alguma semelhança com problemas clássicos da computação? Cite pelo menos um e explique a analogia em suas próprias palavras.
-3. Quais foram as estruturas de dados que você escolheu para representar consultórios, sessões e atendimentos? Por que cada uma delas? O que mudaria se você tivesse usado outra?
-
-### Parte 2 — Estratégia algorítmica
-
-4. Descreva, em linguagem natural (sem código), o algoritmo que você implementou — passo a passo, como se estivesse explicando para um colega que nunca viu o problema.
-5. Sua solução é **gulosa**, **exata**, **heurística** ou usa alguma outra abordagem? Como você chegou a essa decisão?
-6. Existe alguma entrada para a qual seu algoritmo **não encontraria a melhor solução possível**? Dê um exemplo concreto (pode inventar uma lista pequena de atendimentos) e explique o que aconteceria.
-7. Qual é a **complexidade de tempo** aproximada da sua solução em função do número `n` de atendimentos? Mostre seu raciocínio para chegar nessa estimativa.
-
-### Parte 3 — Decisões de implementação
-
-8. Como seu programa decide **quantos consultórios** abrir? Explique o critério.
-9. Como você tratou os atendimentos **expressos**? Por que essa abordagem?
-10. Aponte um trecho do seu código que você considera **a parte mais inteligente** da solução, e outro que você acha que **poderia ser melhorado**. Justifique ambos.
+```
+.
+├── main.py                  # ponto de entrada (CLI)
+├── atendimentos.txt         # entrada oficial do desafio
+├── saida_oficial.txt        # exemplo de saída para a entrada oficial
+├── clinica/                 # pacote com a lógica
+│   ├── regras.py            # horários e capacidades (constantes)
+│   ├── modelos.py           # Atendimento, Sessao, Consultorio
+│   ├── parser.py            # leitura do arquivo de entrada
+│   ├── escalonador.py       # o algoritmo de organização
+│   └── relatorio.py         # formatação da agenda final
+├── tests/
+│   └── test_clinica.py      # suíte de testes (unittest)
+├── RACIOCINIO.md            # justificativa do raciocínio (12 perguntas)
+└── README.md
+```

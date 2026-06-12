@@ -1,0 +1,34 @@
+Consultório 1:
+08:00 Consulta com nutricionista veterinária 45min
+08:45 Consulta comportamental para gato resgatado 45min
+09:30 Avaliação ortopédica em cão com displasia 45min
+10:15 Exame de sangue completo 30min
+10:45 Retirada de pontos pós-cirúrgicos 30min
+11:15 Aplicação de vacina V10 expresso
+11:30 Higienização
+13:30 Cirurgia ortopédica em cão atropelado 120min
+15:30 Ultrassonografia abdominal 60min
+16:30 Resgate emocional: socialização de gato feral 60min
+17:30 Reunião de encerramento
+
+Consultório 2:
+08:00 Vermifugação em ninhada de filhotes 30min
+08:30 Curativo de ferida exposta 30min
+09:00 Raio-X de pata traseira 30min
+09:30 Tratamento de otite em cão 30min
+11:30 Higienização
+13:30 Castração de gato adulto 90min
+15:00 Cirurgia de remoção de tumor cutâneo 90min
+16:30 Limpeza dentária em cão de pequeno porte 45min
+17:15 Consulta de rotina em filhote de gato 30min
+17:45 Aplicação de vacina antirrábica expresso
+17:55 Reunião de encerramento
+
+Consultório 3:
+11:30 Higienização
+13:30 Castração de cadela em fase reprodutiva 90min
+15:00 Atendimento de emergência respiratória 60min
+16:00 Avaliação cardiológica em cão idoso 60min
+17:00 Avaliação dermatológica em cão com sarna 45min
+17:45 Microchipagem expresso
+17:55 Reunião de encerramento
